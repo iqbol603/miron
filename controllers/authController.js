@@ -4,7 +4,7 @@ const connectDB = require('../config/db'); // Подключаем соедин�
 
 // Авторизация пользователя (проверка логина и пароля)
 exports.loginUser = async (req, res) => {
-  pool.end();
+  // pool.end();
 
   const { login, password } = req.body;
 
