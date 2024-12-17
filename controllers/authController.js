@@ -4,8 +4,6 @@ const connectDB = require('../config/db'); // Подключаем соедин�
 
 // Авторизация пользователя (проверка логина и пароля)
 exports.loginUser = async (req, res) => {
-  // pool.end();
-
   const { login, password } = req.body;
 
   console.log("log",req.body);
@@ -15,10 +13,8 @@ exports.loginUser = async (req, res) => {
 
   try {
     // Получаем пользователя из базы данных
-    const pool = await connectDB();  // Получаем пул соединений
-    // const connection = await connectDB();
-    // const [rows] = await connection.execute('SELECT * FROM users WHERE login = ?', [login]);
-    const [rows] = await pool.query('SELECT * FROM users WHERE login = ?', [login]);
+    const connection = await connectDB();
+    const [rows] = await connection.execute('SELECT * FROM users WHERE login = ?', [login]);
 
     if (rows.length === 0) {
       return res.status(401).json({ error: 'Invalid login or password' });
