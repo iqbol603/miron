@@ -9,9 +9,6 @@ async function getProductById(productId) {
     return rows[0]; // Возвращаем первый результат, если найден
   } catch (err) {
     throw new Error('Ошибка при получении продукта: ' + err.message);
-  } finally {
-    // Закрытие пула после выполнения запроса
-    await pool.end();  // Закрываем пул соединений
   }
 }
 
@@ -24,9 +21,6 @@ async function getCustomerById(customerId) {
     return rows[0]; // Возвращаем клиента
   } catch (err) {
     throw new Error('Ошибка при получении клиента: ' + err.message);
-  } finally {
-    // Закрытие пула после выполнения запроса
-    await pool.end();  // Закрываем пул соединений
   }
 }
 
@@ -45,9 +39,6 @@ async function generateUniqueOrderId() {
       }
     } catch (err) {
       throw new Error('Ошибка при проверке уникальности orderId: ' + err.message);
-    } finally {
-      // Закрытие пула после выполнения запроса
-      await pool.end();  // Закрываем пул соединений
     }
   }
 
@@ -101,9 +92,6 @@ exports.addOrder = async (req, res) => {
   } catch (error) {
     console.error("Ошибка при добавлении заказа:", error);
     res.status(500).json({ error: error.message });
-  }  finally {
-    // Закрытие пула после выполнения запроса
-    await pool.end();  // Закрываем пул соединений
   }
 };
 
@@ -164,9 +152,6 @@ exports.getAllOrders = async (req, res) => {
   } catch (error) {
     console.error("Ошибка при получении заказов:", error);
     res.status(500).json({ error: error.message });
-  } finally {
-    // Закрытие пула после выполнения запроса
-    await pool.end();  // Закрываем пул соединений
   }
 };
 
@@ -207,9 +192,6 @@ exports.getDailyOrderStats = async (req, res) => {
   } catch (error) {
     console.error("Ошибка при получении дневной аналитики заказов:", error);
     res.status(500).json({ error: error.message });
-  } finally {
-    // Закрытие пула после выполнения запроса
-    await pool.end();  // Закрываем пул соединений
   }
 };
 
@@ -265,9 +247,6 @@ exports.getDailyProductStats = async (req, res) => {
   } catch (error) {
     console.error("Ошибка при получении дневной статистики продуктов:", error);
     res.status(500).json({ error: error.message });
-  } finally {
-    // Закрытие пула после выполнения запроса
-    await pool.end();  // Закрываем пул соединений
   }
 };
 
@@ -315,9 +294,6 @@ exports.getMonthlyOrderStats = async (req, res) => {
   } catch (error) {
     console.error("Ошибка при получении месячной аналитики заказов:", error);
     res.status(500).json({ error: error.message });
-  } finally {
-    // Закрытие пула после выполнения запроса
-    await pool.end();  // Закрываем пул соединений
   }
 };
 
@@ -375,9 +351,6 @@ exports.getMonthlyProductStats = async (req, res) => {
   } catch (error) {
     console.error("Ошибка при получении статистики продуктов по месяцам:", error);
     res.status(500).json({ error: error.message });
-  } finally {
-    // Закрытие пула после выполнения запроса
-    await pool.end();  // Закрываем пул соединений
   }
 };
 
@@ -422,9 +395,6 @@ exports.getYearlyOrderStats = async (req, res) => {
   } catch (error) {
     console.error("Ошибка при получении годовой аналитики заказов:", error);
     res.status(500).json({ error: error.message });
-  } finally {
-    // Закрытие пула после выполнения запроса
-    await pool.end();  // Закрываем пул соединений
   }
 };
 
@@ -480,9 +450,6 @@ exports.getYearlyProductStats = async (req, res) => {
   } catch (error) {
     console.error("Ошибка при получении статистики продуктов по годам:", error);
     res.status(500).json({ error: error.message });
-  } finally {
-    // Закрытие пула после выполнения запроса
-    await pool.end();  // Закрываем пул соединений
   }
 };
 
