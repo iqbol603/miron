@@ -2,8 +2,12 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const connectDB = require('../config/db'); // Подключаем соединение с БД
 
+
+
+
 // Авторизация пользователя (проверка логина и пароля)
 exports.loginUser = async (req, res) => {
+  
   const { login, password } = req.body;
 
   console.log("log",req.body);
@@ -12,6 +16,8 @@ exports.loginUser = async (req, res) => {
   }
 
   try {
+
+    // await clearPool();
     // Получаем пользователя из базы данных
     const connection = await connectDB();
     const [rows] = await connection.execute('SELECT * FROM users WHERE login = ?', [login]);
