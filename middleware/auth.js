@@ -8,11 +8,11 @@ module.exports = (req, res, next) => {
     return res.status(401).json({ error: 'Токен не предоставлен' });
   }
   const token = header.split(' ')[1];
-  console.log("token",token);
+//   console.log("token",token);
   try {
-    console.log("secret",process.env.JWT_SECRET);
+    // console.log("secret",process.env.JWT_SECRET);
     const payload = jwt.verify(token, process.env.JWT_SECRET);
-console.log('✅ JWT payload:', payload);
+// console.log('✅ JWT payload:', payload);
 req.user = { id: payload.userId };
 next();
   } catch {
