@@ -1,4 +1,4 @@
-const connectDB = require('../config/db'); // Подключаем функцию для соединения с БД
+const db = require('../config/db'); // Подключаем функцию для соединения с БД
 
 // Добавление нового клиента
 exports.addCustomer = async (req, res) => {
@@ -12,8 +12,8 @@ exports.addCustomer = async (req, res) => {
   const values = [name, phone, email, price];
 
   try {
-    const connection = await connectDB();
-    const [result] = await connection.execute(query, values);
+    // const connection = await db();
+    const [result] = await db.execute(query, values);
     res.status(201).json({ id: result.insertId, name, phone, email, price });
     connection.end();
   } catch (error) {
@@ -27,8 +27,8 @@ exports.getCustomers = async (req, res) => {
   const query = 'SELECT * FROM customers';
 
   try {
-    const connection = await connectDB();
-    const [rows] = await connection.execute(query);
+    // const connection = await db();
+    const [rows] = await db.execute(query);
     res.json(rows);
     connection.end();
   } catch (error) {
@@ -44,8 +44,8 @@ exports.updateCustomer = async (req, res) => {
   const values = [name, phone, email, price, req.params.id];
 
   try {
-    const connection = await connectDB();
-    const [result] = await connection.execute(query, values);
+    // const connection = await db();
+    const [result] = await db.execute(query, values);
 
     if (result.affectedRows === 0) {
       return res.status(404).json({ error: 'Customer not found' });
@@ -65,8 +65,8 @@ exports.deleteCustomer = async (req, res) => {
   const values = [req.params.id];
 
   try {
-    const connection = await connectDB();
-    const [result] = await connection.execute(query, values);
+    // const connection = await db();
+    const [result] = await db.execute(query, values);
 
     if (result.affectedRows === 0) {
       return res.status(404).json({ error: 'Customer not found' });
@@ -91,8 +91,8 @@ exports.getDailyCustomerStats = async (req, res) => {
   `;
 
   try {
-    const connection = await connectDB();
-    const [rows] = await connection.execute(query);
+    // const connection = await db();
+    const [rows] = await db.execute(query);
     res.json(rows);
     connection.end();
   } catch (error) {
@@ -112,8 +112,8 @@ exports.getMonthlyCustomerStats = async (req, res) => {
   `;
 
   try {
-    const connection = await connectDB();
-    const [rows] = await connection.execute(query);
+    // const connection = await db();
+    const [rows] = await db.execute(query);
     res.json(rows);
     connection.end();
   } catch (error) {
@@ -133,8 +133,8 @@ exports.getYearlyCustomerStats = async (req, res) => {
   `;
 
   try {
-    const connection = await connectDB();
-    const [rows] = await connection.execute(query);
+    // const connection = await db();
+    const [rows] = await db.execute(query);
     res.json(rows);
     connection.end();
   } catch (error) {

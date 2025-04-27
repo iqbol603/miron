@@ -1,13 +1,13 @@
 // models/Product.js
 // models/Product.js
 // models/Product.js
-const connectDB = require('../config/db'); // Подключение к базе данных
+const db = require('../config/db'); // Подключение к базе данных
 
 // Функция для добавления продукта в базу данных
 const addProduct = async (name, price) => {
-  const connection = await connectDB();
+  // const connection = await db();
 
-  const [rows] = await connection.execute(
+  const [rows] = await db.execute(
     'INSERT INTO products (name, price) VALUES (?, ?)',
     [name, price]
   );
@@ -18,9 +18,9 @@ const addProduct = async (name, price) => {
 
 // Функция для получения всех продуктов из базы данных
 const getProducts = async () => {
-  const connection = await connectDB();
+  // const connection = await db();
 
-  const [rows] = await connection.execute('SELECT * FROM products');
+  const [rows] = await db.execute('SELECT * FROM products');
   console.log('All Products:', rows);
 
   connection.end();

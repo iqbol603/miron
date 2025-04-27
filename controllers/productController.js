@@ -1,4 +1,4 @@
-const connectDB = require('../config/db'); // Подключаем функцию для соединения с базой данных
+const db = require('../config/db'); // Подключаем функцию для соединения с базой данных
 
 // Добавление продукта
 exports.addProduct = async (req, res) => {
@@ -12,8 +12,8 @@ exports.addProduct = async (req, res) => {
   const values = [name, price];
 
   try {
-    const pool = await connectDB(); // Получаем пул соединений
-    const [result] = await pool.query(query, values); // Выполняем запрос с использованием пула
+    // const pool = await db(); // Получаем пул соединений
+    const [result] = await db.query(query, values); // Выполняем запрос с использованием пула
     res.status(201).json({ id: result.insertId, name, price });
   } catch (error) {
     console.error('Error inserting product:', error);
@@ -63,8 +63,8 @@ exports.getProducts = async (req, res) => {
   const query = 'SELECT * FROM products';
 
   try {
-    const pool = await connectDB(); // Получаем пул соединений
-    const [rows] = await pool.query(query); // Выполняем запрос с использованием пула
+    // const pool = await db(); // Получаем пул соединений
+    const [rows] = await db.query(query); // Выполняем запрос с использованием пула
     res.json(rows); // Отправляем результат запроса
   } catch (error) {
     console.error('Error fetching products:', error);

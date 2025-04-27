@@ -1,14 +1,14 @@
 // app.js или другой файл, где нужно выполнить запрос
 require('dotenv').config();  // Это загрузит переменные окружения из .env файла
 
-const connectDB = require('./config/db');
+const db = require('./config/db');
 
 async function runApp() {
-  const connection = await connectDB(); // Получаем подключение к базе данных
+  // const connection = await db(); // Получаем подключение к базе данных
 
   try {
     // Пример запроса: Получение всех записей из таблицы `products`
-    const [rows, fields] = await connection.execute('SELECT * FROM products');
+    const [rows, fields] = await db.execute('SELECT * FROM products');
     console.log('Products:', rows);
 
     // Пример вставки нового продукта
